@@ -1,11 +1,10 @@
 ﻿namespace ConcertsAPI.Models
 {
-    public class Artist
+    public class Genre
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public Genre Genre { get; set; }
+        public string Description { get; set; }
+
         public IList<Concert> Concerts { get; set; }
-        
     }
 }
