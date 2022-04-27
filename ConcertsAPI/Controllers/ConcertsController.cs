@@ -1,83 +1,58 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ConcertsAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ConcertsAPI.Controllers
 {
-    public class ConcertsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ArtistsController : ControllerBase
     {
-        // GET: ConcertsController
-        public ActionResult Index()
+        private static IList<Artist> ArtistsList = new List<Artist>();
+        // GET: api/<ArtistController>
+        [HttpGet]
+        public IEnumerable<Artist> Get()
         {
-            return View();
+            return ArtistsList;
         }
 
-        // GET: ConcertsController/Details/5
-        public ActionResult Details(int id)
+        // GET api/<ArtistController>/5
+        [HttpGet("{id}")]
+        public async T IActionResult Get(int id)
         {
-            return View();
+            var artist = ArtistsList.FirstOrDefault(v => v.Id == id);
+            if (artist == null)
+                return NotFound();
+            else
+                return Ok(artist);
+
         }
 
-        // GET: ConcertsController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ConcertsController/Create
+        // POST api/<ArtistController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Post([FromBody] Artist artist)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (ArtistsList.Any(v => v.Id == artist.Id))
+                return BadRequest($"Venue with {artist.Id} already exissts");
+            ArtistsList.Add(artist);
+            return CreatedAtAction("Get", artist.Id);
         }
 
-        // GET: ConcertsController/Edit/5
-        public ActionResult Edit(int id)
+
+        // PUT api/<ArtistController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Artist newArtistData)
         {
-            return View();
+            newArtistData.Id = id;
+            ArtistsList[id] = newArtistData;
         }
 
-        // POST: ConcertsController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<ArtistController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ConcertsController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ConcertsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
