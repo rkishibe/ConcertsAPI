@@ -7,52 +7,61 @@ namespace ConcertsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArtistsController : ControllerBase
+    public class ConcertsController : ControllerBase
     {
-        private static IList<Artist> ArtistsList = new List<Artist>();
-        // GET: api/<ArtistController>
+        private static IList<Concert> ConcertsList = new List<Concert>();
+        // GET: api/<ConcertsController>
         [HttpGet]
-        public IEnumerable<Artist> Get()
+        public IEnumerable<Concert> Get()
         {
-            return ArtistsList;
+            return ConcertsList;
         }
 
-        // GET api/<ArtistController>/5
+        // GET api/<ConcertsController>/5
         [HttpGet("{id}")]
-        public async T IActionResult Get(int id)
+        public IActionResult Get(int id)
         {
-            var artist = ArtistsList.FirstOrDefault(v => v.Id == id);
-            if (artist == null)
+            var concert = ConcertsList.FirstOrDefault(v => v.Id == id);
+            if (concert == null)
                 return NotFound();
             else
-                return Ok(artist);
+                return Ok(concert);
 
         }
 
-        // POST api/<ArtistController>
+        // POST api/<ConcertsController>
         [HttpPost]
-        public IActionResult Post([FromBody] Artist artist)
+        public IActionResult Post([FromBody] Concert concert)
         {
-            if (ArtistsList.Any(v => v.Id == artist.Id))
-                return BadRequest($"Venue with {artist.Id} already exissts");
-            ArtistsList.Add(artist);
-            return CreatedAtAction("Get", artist.Id);
+            if (ConcertsList.Any(v => v.Id == concert.Id))
+                return BadRequest($"Venue with {concert.Id} already exissts");
+            ConcertsList.Add(concert);
+            return CreatedAtAction("Get", concert.Id);
         }
 
 
-        // PUT api/<ArtistController>/5
+        // PUT api/<ConcertsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Artist newArtistData)
+        public IActionResult Put(int id, [FromBody] Concert newConcertData)
         {
-            newArtistData.Id = id;
-            ArtistsList[id] = newArtistData;
+            var concert = ConcertsList.FirstOrDefault(c => c.Id == id);
+            if (concert == null)
+                return NotFound();
+
+            newConcertData.Id = id;
+            ConcertsList[ConcertsList.IndexOf(concert)] = newConcertData;
+
+            return Ok(ConcertsList[ConcertsList.IndexOf(concert)]);
         }
 
-        // DELETE api/<ArtistController>/5
+        // DELETE api/<ConcertsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-
+            var concert = ConcertsList.FirstOrDefault(c => c.Id == id);
+            if (concert != null)
+                ConcertsList.Remove(concert);
+            return Ok();
         }
     }
 }

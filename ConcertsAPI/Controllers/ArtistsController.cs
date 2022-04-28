@@ -10,14 +10,14 @@ namespace ConcertsAPI.Controllers
     public class ArtistsController : ControllerBase
     {
         private static IList<Artist> ArtistsList = new List<Artist>();
-        // GET: api/<ArtistController>
+        // GET: api/<ArtistsController>
         [HttpGet]
         public IEnumerable<Artist> Get()
         {
             return ArtistsList;
         }
 
-        // GET api/<ArtistController>/5
+        // GET api/<ArtistsController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -29,7 +29,7 @@ namespace ConcertsAPI.Controllers
 
         }
 
-        // POST api/<ArtistController>
+        // POST api/<ArtistsController>
         [HttpPost]
             public IActionResult Post([FromBody] Artist artist)
             {
@@ -38,21 +38,30 @@ namespace ConcertsAPI.Controllers
                 ArtistsList.Add(artist);
                 return CreatedAtAction("Get", artist.Id);
             }
-        
 
-        // PUT api/<ArtistController>/5
+
+        // PUT api/<ArtistsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Artist newArtistData)
+        public IActionResult Put(int id, [FromBody] Artist newArtistData)
         {
+            var artist = ArtistsList.FirstOrDefault(a => a.Id == id);
+            if (artist == null)
+                return NotFound();
+
             newArtistData.Id = id;
-            ArtistsList[id] = newArtistData;
+            ArtistsList[ArtistsList.IndexOf(artist)] = newArtistData;
+
+            return Ok(ArtistsList[ArtistsList.IndexOf(artist)]);
         }
 
-        // DELETE api/<ArtistController>/5
+        // DELETE api/<ArtistsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-
+            var artist = ArtistsList.FirstOrDefault(a => a.Id == id);
+            if (artist != null)
+                ArtistsList.Remove(artist);
+            return Ok();
         }
     }
 }

@@ -41,18 +41,26 @@ namespace ConcertsAPI.Controllers
 
         // PUT api/<VenuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Venue newVenueData)
+        public IActionResult Put(int id, [FromBody] Venue newVenueData)
         {
-            newVenueData.Id = id;
-            VenuesList[id] = newVenueData;
+            var venue = VenuesList.FirstOrDefault(v => v.Id == id);
+            if (venue == null)
+                return NotFound();
 
+            newVenueData.Id = id;
+            VenuesList[VenuesList.IndexOf(venue)] = newVenueData;
+
+            return Ok(VenuesList[VenuesList.IndexOf(venue)]);
         }
 
         // DELETE api/<VenuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            //VenuesList.Remove(Get(id));
+            var venue = VenuesList.FirstOrDefault(v => v.Id == id);
+            if (venue != null)
+                VenuesList.Remove(venue);
+            return Ok();
         }
     }
 }
