@@ -11,7 +11,11 @@ public class UserTokens
         get;
         set;
     }
+<<<<<<< Updated upstream
     public TimeSpan Validaty
+=======
+    public TimeSpan Validity
+>>>>>>> Stashed changes
     {
         get;
         set;

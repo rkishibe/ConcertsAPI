@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using ConcertsAPI.Controllers.Data;
 using AutoMapper;
 using ConcertsAPI.Data;
+<<<<<<< Updated upstream
+=======
+using Microsoft.AspNetCore.Authorization;
+>>>>>>> Stashed changes
 using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,6 +31,10 @@ namespace ConcertsAPI.Controllers
 
         // GET: api/<ConcertsController>
         [HttpGet(Name ="AllStations")]
+<<<<<<< Updated upstream
+=======
+        [AllowAnonymous]
+>>>>>>> Stashed changes
         public IEnumerable<Concert> AllStations(int page=1, int pageSize=10, string? name="")
         {
             var skip=(page - 1)*pageSize;
@@ -92,6 +100,10 @@ namespace ConcertsAPI.Controllers
 
         // POST api/<ConcertsController>
         [HttpPost(Name = "CreateStation")]
+<<<<<<< Updated upstream
+=======
+        [Authorize(AuthenticationSchemes =Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+>>>>>>> Stashed changes
         public IActionResult CreateStation([FromBody] Concert concert)
         {
             var concertDto = new ConcertDTO
@@ -121,7 +133,11 @@ namespace ConcertsAPI.Controllers
          }
 
         // DELETE api/<ConcertsController>/5
+<<<<<<< Updated upstream
         [HttpDelete("{id}")]
+=======
+        [HttpDelete("{id}", Name="DeleteConcert")]
+>>>>>>> Stashed changes
         public IActionResult DeleteStation(int id)
         {
             var concert = ConcertsList.FirstOrDefault(c => c.Id == id);

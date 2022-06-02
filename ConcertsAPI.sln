@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertsAPI", "ConcertsAPI\ConcertsAPI.csproj", "{0F227CDB-258C-4479-A381-0DE798666791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertsAPI.Test", "ConcertsAPI.Test\ConcertsAPI.Test.csproj", "{632612B2-E324-407F-AE01-6AA625E7D9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertsAPI.Test", "ConcertsAPI.Test\ConcertsAPI.Test.csproj", "{632612B2-E324-407F-AE01-6AA625E7D9B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
