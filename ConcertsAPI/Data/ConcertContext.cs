@@ -8,6 +8,6 @@ namespace ConcertsAPI.Controllers.Data
         public ConcertContext(DbContextOptions<ConcertContext> dbContextOptions) : base(dbContextOptions)
         { }
         public DbSet<ArtistDTO> Artists { get; set; }
-        public DbSet<ConcertDTO> Concerts { get; set; }    
+        public DbSet<ConcertDTO> Concerts { get; set; }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertsAPI", "ConcertsAPI\ConcertsAPI.csproj", "{0F227CDB-258C-4479-A381-0DE798666791}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertsAPI.Test", "ConcertsAPI.Test\ConcertsAPI.Test.csproj", "{632612B2-E324-407F-AE01-6AA625E7D9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcertsAPITest", "ConcertsAPITest\ConcertsAPITest.csproj", "{50C0631F-ED72-4B39-8D51-48F842A1AE3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0F227CDB-258C-4479-A381-0DE798666791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F227CDB-258C-4479-A381-0DE798666791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F227CDB-258C-4479-A381-0DE798666791}.Release|Any CPU.Build.0 = Release|Any CPU
-		{632612B2-E324-407F-AE01-6AA625E7D9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{632612B2-E324-407F-AE01-6AA625E7D9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{632612B2-E324-407F-AE01-6AA625E7D9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{632612B2-E324-407F-AE01-6AA625E7D9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50C0631F-ED72-4B39-8D51-48F842A1AE3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C0631F-ED72-4B39-8D51-48F842A1AE3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C0631F-ED72-4B39-8D51-48F842A1AE3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C0631F-ED72-4B39-8D51-48F842A1AE3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

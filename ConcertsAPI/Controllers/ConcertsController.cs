@@ -3,16 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using ConcertsAPI.Controllers.Data;
 using AutoMapper;
 using ConcertsAPI.Data;
-<<<<<<< Updated upstream
-=======
 using Microsoft.AspNetCore.Authorization;
->>>>>>> Stashed changes
-using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ConcertsAPI.Controllers
 {
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class ConcertsController : ControllerBase
@@ -30,17 +27,13 @@ namespace ConcertsAPI.Controllers
         }
 
         // GET: api/<ConcertsController>
-        [HttpGet(Name ="AllStations")]
-<<<<<<< Updated upstream
-=======
-        [AllowAnonymous]
->>>>>>> Stashed changes
-        public IEnumerable<Concert> AllStations(int page=1, int pageSize=10, string? name="")
+        [HttpGet(Name = "AllConcerts")]
+        public IEnumerable<Concert> AllStations(int page = 1, int pageSize = 10, string? name = "")
         {
-            var skip=(page - 1)*pageSize;
+            var skip = (page - 1) * pageSize;
             List<ConcertDTO> concertDTOs;
 
-          
+
             if (string.IsNullOrEmpty(name))
             {
                 concertDTOs = _dataContext.Concerts.
@@ -58,20 +51,20 @@ namespace ConcertsAPI.Controllers
 
             }
 
-                var count=_dataContext.Concerts.Count();
-                var concerts=_mapper.Map<List<Concert>>(concertDTOs);
+            var count = _dataContext.Concerts.Count();
+            var concerts = _mapper.Map<List<Concert>>(concertDTOs);
 
             #region paginatie intr-un singur header
             // informatia despre paginatie este trimisa intr-un singur header
             //var paginationResult = new PaginationResult
-           // {
-           //     Page = page,
-           //     PageSize = pageSize,
-           //     TotalResults = count,
+            // {
+            //     Page = page,
+            //     PageSize = pageSize,
+            //     TotalResults = count,
             //    TotalPages = (int)Math.Ceiling(count / (decimal)pageSize)
-           // };
+            // };
 
-          //  Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationResult));
+            //  Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationResult));
             #endregion
 
             #region paginatie ca headere multiple
@@ -92,26 +85,22 @@ namespace ConcertsAPI.Controllers
             var concertDto = ConcertsList.FirstOrDefault(v => v.Id == id);
             if (concertDto == null)
                 return NotFound();
-            
+
             var concert = _mapper.Map<Concert>(concertDto);
-                return Ok(concertDto);
+            return Ok(concertDto);
 
         }
 
         // POST api/<ConcertsController>
-        [HttpPost(Name = "CreateStation")]
-<<<<<<< Updated upstream
-=======
-        [Authorize(AuthenticationSchemes =Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
->>>>>>> Stashed changes
+        [HttpPost(Name = "CreateConcert")]
         public IActionResult CreateStation([FromBody] Concert concert)
         {
             var concertDto = new ConcertDTO
             {
                 Name = concert.Name,
             };
-               
-            var newConcert =_dataContext.Concerts.Add(concertDto);
+
+            var newConcert = _dataContext.Concerts.Add(concertDto);
             _dataContext.SaveChanges();
 
             return Ok();
@@ -122,22 +111,18 @@ namespace ConcertsAPI.Controllers
         [HttpPut("{id}", Name = "UpdateConcert")]
         public IActionResult UpdateConcert(int id, [FromBody] Concert newConcertData)
         {
-           var concert = ConcertsList.FirstOrDefault(c => c.Id == id);
-          if (concert == null)
-               return NotFound();
+            var concert = ConcertsList.FirstOrDefault(c => c.Id == id);
+            if (concert == null)
+                return NotFound();
 
-           newConcertData.Id = id;
-          ConcertsList[ConcertsList.IndexOf(concert)] = newConcertData;
+            newConcertData.Id = id;
+            ConcertsList[ConcertsList.IndexOf(concert)] = newConcertData;
 
-           return Ok(ConcertsList[ConcertsList.IndexOf(concert)]);
-         }
+            return Ok(ConcertsList[ConcertsList.IndexOf(concert)]);
+        }
 
         // DELETE api/<ConcertsController>/5
-<<<<<<< Updated upstream
         [HttpDelete("{id}")]
-=======
-        [HttpDelete("{id}", Name="DeleteConcert")]
->>>>>>> Stashed changes
         public IActionResult DeleteStation(int id)
         {
             var concert = ConcertsList.FirstOrDefault(c => c.Id == id);

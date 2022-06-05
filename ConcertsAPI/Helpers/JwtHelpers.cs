@@ -2,9 +2,10 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+//using ConcertsAPI.Models.Auth;
 using WebApplication.Models;
 
-namespace TransportApi.Helpers
+namespace ConcertsAPI.Helpers
 {
     public static class JwtHelpers
     {

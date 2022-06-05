@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace ConcertsAPI.Test
+namespace ConcertsAPITest
 {
     public class UnitTest1
     {
